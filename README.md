@@ -1,6 +1,6 @@
 # envy
 
-TODO: Write a description here
+Envy is a shard that loads environment variables from a `.env` files into `ENV`.
 
 ## Installation
 
@@ -15,14 +15,50 @@ dependencies:
 ## Usage
 
 ```crystal
+# As early as possible in your application, require and load a `.env` file
 require "envy"
+
+# Load environment variables from `.env` file in the current working directory
+Envy.load
+
+# This will load environment variables and overwrite existing ones
+Envy.load!
+
+# You can specify multiple files and they will be loaded in order.
+Envy.load ".env.development", ".env.redis"
+
+# To parse a `.env` file, returns `Hash(String, String)`. Raises if the file does not exist.
+Envy.parse ".env"
 ```
 
-TODO: Write usage instructions here
+## `.env` files
 
-## Development
+```shell
+# Comments and empty lines are ignored
 
-TODO: Write development instructions here
+# Basic environment variable
+NAME=value
+
+# You can add export in front of each line so you can source the file
+export NAME=value
+
+# Spaces inside values are kept
+SPACES=are kept
+
+# Double quotes are removed from beginning and end but kept in the inside
+# e.g. QUOTES => here are \"\" inside
+QUOTES="here are "" inside"
+
+# Equal signs are allowd inside values
+EQUAL_SIGNS=are=allowed=
+
+# Variable names are automatically upcased
+# e.g. NaMe => NAME
+NaMe=value
+
+# Empty value become empty string
+EMPTY= 
+```
 
 ## Contributing
 
