@@ -2,6 +2,9 @@
 
 Envy is a shard that loads environment variables from a `.env` files into `ENV`.
 
+[![Travis](https://img.shields.io/travis/petoem/envy.svg?style=flat-square)](https://travis-ci.org/petoem/envy)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/petoem/envy/blob/master/LICENSE)
+
 ## Installation
 
 Add this to your application's `shard.yml`:
