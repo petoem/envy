@@ -20,7 +20,7 @@ module Envy
   end
   {% end %}
 
-  def parse(filename = String) : Hash(String, String)
+  def parse(filename : String) : Hash(String, String)
     env_vars = {} of String => String
     File.each_line File.expand_path(filename) do |line|
       line = line.strip
