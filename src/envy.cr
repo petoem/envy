@@ -5,7 +5,7 @@ module Envy
   DEFAULT_ENV_FILENAME = ".env"
 
   {% for name, comp in {load: :"||=", load!: :"="} %}
-  def {{name.id}}(*filename : String)
+  def {{name.id}}(*filename)
     filename.each do |file|
       env_vars = parse file
       {{name.id}} env_vars
