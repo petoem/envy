@@ -30,7 +30,7 @@ module Envy
   end
   {% end %}
 
-  def parse(filename : String, hash = {} of Symbol => Bool) : Hash(String, String)
+  def parse(filename : String, option = {} of Symbol => Bool) : Hash(String, String)
     env_vars = {} of String => String
     File.each_line File.expand_path(filename) do |line|
       line = line.strip
@@ -43,7 +43,7 @@ module Envy
     end
     env_vars
   rescue
-    raise InvalidFileException.new("ENVY - Failed to load #{filename}") if hash[:raise_exception]?
+    raise InvalidFileException.new("ENVY - Failed to load #{filename}") if option[:raise_exception]?
     puts "ENVY - Failed to load #{filename}"
     {} of String => String
   end
