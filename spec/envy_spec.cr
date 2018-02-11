@@ -29,6 +29,44 @@ describe Envy do
     ENV["ANOTHER_LINE"].should eq("some_value")
   end
 
+  context ".env file exists" do
+    it "load .env file with block" do
+      ENV["A_KEY"] = "one value"
+      Envy.load "spec/.env" do
+          { raise_exception: true }
+      end
+      ENV["A_KEY"].should eq("one value")
+      ENV["ANOTHER_LINE"].should eq("some_value")
+    end
+
+    it "load! .env file with block" do
+      ENV["A_KEY"] = "one value"
+      Envy.load! "spec/.env" do
+          { raise_exception: true }
+      end
+      ENV["A_KEY"].should eq("value")
+      ENV["ANOTHER_LINE"].should eq("some_value")
+    end
+  end
+
+  context ".env file does not exist" do
+    it "load .env file with block" do
+      expect_raises(Envy::InvalidFileException) do
+        Envy.load "spec/.env_file_that_does_not_exist" do
+          { raise_exception: true }
+        end
+      end
+    end
+
+    it "load! .env file with block" do
+      expect_raises(Envy::InvalidFileException) do
+        Envy.load! "spec/.env_file_that_does_not_exist" do
+          { raise_exception: true }
+        end
+      end
+    end
+  end
+
   it "parse" do
     env_hash = {"CRYSTAL_ENV"          => "development",
                 "A_KEY"                => "value",
