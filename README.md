@@ -32,6 +32,11 @@ Envy.load ".env.development", ".env.redis"
 
 # To parse a `.env` file, returns `Hash(String, String)`. Raises if the file does not exist.
 Envy.parse ".env"
+
+# To raise an exception if the .env file does not exist, you can append a block to Envy#load or Envy#load!.
+Envy.load! do
+  { with_exception: true }
+end
 ```
 
 ## `.env` files
@@ -60,7 +65,7 @@ EQUAL_SIGNS=are=allowed=
 NaMe=value
 
 # Empty value become empty string
-EMPTY= 
+EMPTY=
 ```
 
 ## Contributing
