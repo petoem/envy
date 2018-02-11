@@ -35,7 +35,7 @@ Envy.parse ".env"
 
 # To raise an exception if the .env file does not exist, you can append a block to Envy#load or Envy#load!.
 Envy.load! do
-  { with_exception: true }
+  { raise_exception: true }
 end
 ```
 
